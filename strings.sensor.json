@@ -1,0 +1,18 @@
+{
+  "state": {
+    "twcdirector__twc_status": {
+      "READY": "Ready (0x00)",
+      "CHARGING": "Charging (0x01)",
+      "ERROR": "Error (0x02)",
+      "WAITING": "Waiting (0x03)",
+      "NEGOTIATING": "Negotiating (0x04)",
+      "MAX_CHARGE": "Maximum Charge Rate (0x05)",
+      "ADJUSTING": "Adjusting (0x06)",
+      "CHARGING_CAR_LOW": "Increase Charge Rate (0x07)",
+      "CHARGE_STARTED": "Charge Started (0x08)",
+      "SETTING_LIMIT": "Setting Limit (0x09)",
+      "ADJUSTMENT_COMPLETE": "Adjustment Complete (0x0A)",
+      "UNKNOWN": "Unknown (0xFF)"
+    }
+  }
+}

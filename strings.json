@@ -1,0 +1,29 @@
+{
+  "title": "Tesla Wall Charger Director",
+  "config": {
+    "title": "Tesla Wall Charger Director",
+    "step": {
+      "confirm": {
+        "title": "Tesla Wall Charger Director",
+        "description": "Do you want to set up Tesla Wall Charger Director?"
+      },
+      "user": {
+        "title": "Configure RS485 Interface and peripheral settings",
+        "data": {
+          "rs485_interface": "RS485 Interface",
+          "twc_total_current": "Total current shared by all Tesla Wall Chargers"
+        }
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Only a single configuration of Tesla Wall Charger Director is possible.",
+      "no_devices_found": "No Tesla Wall Charger peripherals found on the bus."
+    }
+  },
+  "device_automation": {
+    "trigger_type": {
+      "connected": "Car Connected",
+      "disconnected": "Car Disconnected"
+    }
+  }
+}

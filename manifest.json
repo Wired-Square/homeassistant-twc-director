@@ -1,0 +1,19 @@
+{
+  "domain": "twcdirector",
+  "name": "Tesla Wall Charger Director",
+  "config_flow": true,
+  "documentation": "https://github.com/Wired-Square/twc-director",
+  "version": "0.0.1",
+  "requirements": [
+    "twc-director",
+    "aioserial"
+  ],
+  "ssdp": [],
+  "zeroconf": [],
+  "homekit": {},
+  "dependencies": [],
+  "codeowners": [
+    "@Wired-Square",
+    "@garthberry"
+  ]
+}
