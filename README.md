@@ -4,6 +4,9 @@
 
 The Home Assistant Tesla Wall Charger Integration created a fake controller that is directed by Home Assistant. Default and session charge current can be set, a number of sensors record state information. The integration will also generate car connected/disconnected device events.
 
+![image](https://user-images.githubusercontent.com/1577783/125194158-05565a00-e248-11eb-9823-ee0a8ee36191.png)
+
+
 ## Use at your own risk
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
