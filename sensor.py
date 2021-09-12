@@ -10,6 +10,7 @@ from homeassistant.const import (
 )
 
 from homeassistant.components.sensor import (
+    ATTR_STATE_CLASS,
     STATE_CLASS_MEASUREMENT,
     STATE_CLASS_TOTAL_INCREASING,
 )
@@ -37,7 +38,7 @@ SENSOR_TYPES = {
         CONF_DEVICE_CLASS: DEVICE_CLASS_ENERGY,
         CONF_SCALE: 1,
         CONF_UNIT_OF_MEASUREMENT: ENERGY_KILO_WATT_HOUR,
-        "state_class": STATE_CLASS_TOTAL_INCREASING
+        ATTR_STATE_CLASS: STATE_CLASS_TOTAL_INCREASING
     },
     "voltage_phase_l1": {
         CONF_FRIENDLY_NAME: "AC Voltage Phase 1",
@@ -163,7 +164,7 @@ class TWCStateSensor(TWCDeviceEntity):
         self._entity_attribute = entity_attribute
         self._entity_detail = entity_detail
         self._unit_of_measure = entity_detail[CONF_UNIT_OF_MEASUREMENT]
-        self._state_class = entity_detail.get("state_class", None)
+        self._state_class = entity_detail.get(ATTR_STATE_CLASS, None)
         self._round = entity_detail.get(CONF_ROUND, None)
         self._format = entity_detail.get(CONF_FORMAT, None)
         self._scale = entity_detail.get(CONF_SCALE, None)
