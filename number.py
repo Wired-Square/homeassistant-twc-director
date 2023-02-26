@@ -165,11 +165,19 @@ class TWCSessionCurrentEntity(TWCDefaultCurrentEntity):
 
     def set_value(self, value: float) -> None:
         """Update the current value."""
-        self._twc_controller.queue_peripheral_session_current_command(self._twc_device.get_address(), int(value * 100))
+        if value == 0:
+            self._twc_controller.queue_peripheral_open_contactors_command(self._twc_device.get_address())
+        else:
+            self._twc_controller.queue_peripheral_close_contactors_command(self._twc_device.get_address())
+            self._twc_controller.queue_peripheral_session_current_command(self._twc_device.get_address(), int(value * 100))
 
     async def async_set_value(self, value: float) -> None:
         """Update the current value."""
-        await self._twc_controller.queue_peripheral_session_current_command(self._twc_device.get_address(), int(value * 100))
+        if value == 0:
+            await self._twc_controller.queue_peripheral_open_contactors_command(self._twc_device.get_address())
+        else:
+            await self._twc_controller.queue_peripheral_close_contactors_command(self._twc_device.get_address())
+            await self._twc_controller.queue_peripheral_session_current_command(self._twc_device.get_address(), int(value * 100))
 
     @property
     def value(self) -> float:
