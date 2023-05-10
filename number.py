@@ -32,7 +32,7 @@ async def new_number_processor(device_queue, hass, entry, async_add_entities):
 
             default_current_endpoint = TWCDefaultCurrentEntity(new_device, twc_listener.get_fake_controller(), entry)
             endpoints.append(default_current_endpoint)
-            device_registry = await hass.helpers.device_registry.async_get_registry()
+            device_registry = hass.helpers.device_registry.async_get(hass)
             device_info = default_current_endpoint.device_info
             device_info["config_entry_id"] = entry.entry_id
             device = device_registry.async_get_or_create(**device_info)
@@ -40,7 +40,7 @@ async def new_number_processor(device_queue, hass, entry, async_add_entities):
 
             session_current_endpoint = TWCSessionCurrentEntity(new_device, twc_listener.get_fake_controller(), entry)
             endpoints.append(session_current_endpoint)
-            device_registry = await hass.helpers.device_registry.async_get_registry()
+            device_registry = hass.helpers.device_registry.async_get(hass)
             device_info = session_current_endpoint.device_info
             device_info["config_entry_id"] = entry.entry_id
             device = device_registry.async_get_or_create(**device_info)

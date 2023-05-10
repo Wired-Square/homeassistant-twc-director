@@ -117,7 +117,7 @@ async def new_sensor_processor(device_queue, hass, entry, async_add_entities):
             for (entity_attribute, entity_detail) in SENSOR_TYPES.items():
                 sensor = TWCStateSensor(new_device, entry, entity_attribute, entity_detail)
                 sensors.append(sensor)
-                device_registry = await hass.helpers.device_registry.async_get_registry()
+                device_registry = hass.helpers.device_registry.async_get(hass)
                 device_info = sensor.device_info
                 device_info["config_entry_id"] = entry.entry_id
                 device = device_registry.async_get_or_create(**device_info)

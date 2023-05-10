@@ -92,7 +92,7 @@ async def new_device_processor(device_queue, hass, entry):
 
         if isinstance(new_device, TWCPeripheral):
             event_entity = TWCDeviceEvent(hass, new_device)
-            device_registry = await hass.helpers.device_registry.async_get_registry()
+            device_registry = hass.helpers.device_registry.async_get(hass)
             device_info = event_entity.device_info
             device_info["config_entry_id"] = entry.entry_id
             device = device_registry.async_get_or_create(**device_info)
