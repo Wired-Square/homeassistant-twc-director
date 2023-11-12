@@ -97,7 +97,7 @@ class TWCDefaultCurrentEntity(NumberEntity, TWCDeviceEntity):
         state = await self.async_get_last_state()
 
         if state:
-            self.set_value(float(state.state))
+            self.set_native_value(float(state.state))
 
         self._twc_device.register_device_data_updated_callback({
             Commands.TWC_STATUS.name: self.async_write_ha_state,
@@ -112,15 +112,15 @@ class TWCDefaultCurrentEntity(NumberEntity, TWCDeviceEntity):
         })
 
     @property
-    def min_value(self) -> float:
+    def native_min_value(self) -> float:
         return self._min_value
 
     @property
-    def max_value(self) -> float:
+    def native_max_value(self) -> float:
         return self._twc_device.get_max_current() / 100
 
     @property
-    def step(self) -> float:
+    def native_step(self) -> float:
         return self._step
 
     @property
@@ -138,20 +138,20 @@ class TWCDefaultCurrentEntity(NumberEntity, TWCDeviceEntity):
         """Return the name of the entity."""
         return self._name
 
-    def set_value(self, value: float) -> None:
+    def set_native_value(self, value: float) -> None:
         """Update the current value."""
         self._twc_device.set_setpoint_current(int(value * 100))
 
-    async def async_set_value(self, value: float) -> None:
+    async def async_set_native_value(self, value: float) -> None:
         """Update the current value."""
         self._twc_device.set_setpoint_current(int(value * 100))
 
     @property
-    def value(self) -> float:
+    def native_value(self) -> float:
         return self._twc_device.get_setpoint_current() / 100
 
     @property
-    def unit_of_measurement(self):
+    def native_unit_of_measurement(self):
         return "A"
 
 
@@ -163,7 +163,7 @@ class TWCSessionCurrentEntity(TWCDefaultCurrentEntity):
         self._name = f"{self._twc_device.get_serial()} Session Current Setting"
         self._unique_id = f"{self._twc_device.get_serial()}_session_current_setting"
 
-    def set_value(self, value: float) -> None:
+    def set_native_value(self, value: float) -> None:
         """Update the current value."""
         if value == 0:
             self._twc_controller.queue_peripheral_open_contactors_command(self._twc_device.get_address())
@@ -171,7 +171,7 @@ class TWCSessionCurrentEntity(TWCDefaultCurrentEntity):
             self._twc_controller.queue_peripheral_close_contactors_command(self._twc_device.get_address())
             self._twc_controller.queue_peripheral_session_current_command(self._twc_device.get_address(), int(value * 100))
 
-    async def async_set_value(self, value: float) -> None:
+    async def async_set_native_value(self, value: float) -> None:
         """Update the current value."""
         if value == 0:
             await self._twc_controller.queue_peripheral_open_contactors_command(self._twc_device.get_address())
@@ -180,6 +180,6 @@ class TWCSessionCurrentEntity(TWCDefaultCurrentEntity):
             await self._twc_controller.queue_peripheral_session_current_command(self._twc_device.get_address(), int(value * 100))
 
     @property
-    def value(self) -> float:
+    def native_value(self) -> float:
         return self._twc_device.get_status_current_available() / 100
 
