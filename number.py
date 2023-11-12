@@ -166,10 +166,10 @@ class TWCSessionCurrentEntity(TWCDefaultCurrentEntity):
     def set_native_value(self, value: float) -> None:
         """Update the current value."""
         if value == 0:
-            self._twc_controller.queue_peripheral_open_contactors_command(self._twc_device.get_address())
+            asyncio.create_task(self._twc_controller._event_loop.self._twc_controller.queue_peripheral_open_contactors_command(self._twc_device.get_address()))
         else:
-            self._twc_controller.queue_peripheral_close_contactors_command(self._twc_device.get_address())
-            self._twc_controller.queue_peripheral_session_current_command(self._twc_device.get_address(), int(value * 100))
+            asyncio.create_task(self._twc_controller.queue_peripheral_close_contactors_command(self._twc_device.get_address()))
+            asyncio.create_task(self._twc_controller.queue_peripheral_session_current_command(self._twc_device.get_address(), int(value * 100)))
 
     async def async_set_native_value(self, value: float) -> None:
         """Update the current value."""

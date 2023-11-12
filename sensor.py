@@ -10,6 +10,7 @@ from homeassistant.const import (
 )
 
 from homeassistant.components.sensor import (
+    SensorEntity,
     ATTR_STATE_CLASS,
     STATE_CLASS_MEASUREMENT,
     STATE_CLASS_TOTAL_INCREASING,
@@ -20,6 +21,10 @@ from twcdirector.protocol import Commands, Status
 
 from homeassistant.core import HomeAssistant
 from homeassistant.config_entries import ConfigEntry
+
+from homeassistant.helpers.update_coordinator import (
+    CoordinatorEntity,
+)
 
 from .device import TWCDeviceEntity
 from .const import (
@@ -156,7 +161,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry):
     return True
 
 
-class TWCStateSensor(TWCDeviceEntity):
+class TWCStateSensor(TWCDeviceEntity, SensorEntity):
     """Implementation of a Tesla Wall Charger Director Sensor."""
     def __init__(self, twc_device: TWCPeripheral, entry, entity_attribute, entity_detail):
         """Initialize the sensor."""
@@ -171,7 +176,7 @@ class TWCStateSensor(TWCDeviceEntity):
         self._name = f"{self._twc_device.get_serial()} {self._entity_detail[CONF_FRIENDLY_NAME]}"
         self._unique_id = f"{self._twc_device.get_serial()}_{self._entity_attribute}"
         self._config_entry = entry
-        self._device_class = self._entity_detail[CONF_DEVICE_CLASS]
+        self._device_class = entity_detail.get(CONF_DEVICE_CLASS, None)
 
     async def async_added_to_hass(self):
         """When entity is added to hass."""

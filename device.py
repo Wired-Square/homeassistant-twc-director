@@ -3,6 +3,10 @@ import logging
 
 from homeassistant.helpers.restore_state import RestoreEntity
 
+from homeassistant.components.sensor import (
+    STATE_CLASS_TOTAL_INCREASING,
+)
+
 from twcdirector.device import TWCPeripheral
 from twcdirector.protocol import Commands
 
